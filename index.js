@@ -5,6 +5,8 @@ const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 4500; // Port number when not available
 
 const authRouter = require('./routes/authRoute');
+const reviewRouter = require('./routes/reviewRoutes');
+
 const bodyParser = require('body-parser');
 
 
@@ -13,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/user',authRouter);
+app.use('/api/review',reviewRouter);
 
 
 

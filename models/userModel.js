@@ -1,32 +1,6 @@
 const mongoose = require('mongoose'); 
 const bcrypt = require('bcrypt');
 
-// Declare the Schema of sub object
-const movieSchema = new mongoose.Schema({
-    date: { type: Date, default: Date.now },
-    title: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    
-    },
-    year:{
-        type: Number,
-        required: true,
-    },
-    genre:{
-        type: String,
-        required: true,
-    },
-    director:{
-        type: String,
-        required: true,
-    }
-    
-});
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema({
@@ -43,7 +17,10 @@ const userSchema = new mongoose.Schema({
     refreshToken:{
         type:String,
     },    
-    movies: [movieSchema]
+    movies:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Movie'
+    }]
 });
 userSchema.pre('save', async function(next){
     if(!this.isModified('password')){
